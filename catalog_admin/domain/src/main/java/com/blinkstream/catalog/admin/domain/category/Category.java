@@ -37,6 +37,18 @@ public class Category extends AggregateRoot<CategoryID> {
         return aDeletionDate;
     }
 
+    public Category update(String aName, String aDescription, boolean active){
+        if(active){
+            this.activate();
+        }else {
+            this.deactivate();
+        }
+        this.aName = aName;
+        this.aDescription = aDescription;
+        this.aUpdateDate = Instant.now();
+        return this;
+    }
+
 
     public void validate(final ValidationHandler validationHandler){
         new CategoryValidator(this, validationHandler).validate();
