@@ -73,4 +73,13 @@ public class Category extends AggregateRoot<CategoryID> {
         this.aUpdateDate = Instant.now();
         return this;
     }
+
+    public Category activate(){
+        if(getDeletionDate() != null){
+            this.aDeletionDate = null;
+        }
+        this.isActive = true;
+        this.aUpdateDate = Instant.now();
+        return this;
+    }
 }

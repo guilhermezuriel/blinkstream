@@ -126,4 +126,29 @@ public class CategoryTest {
         Assertions.assertTrue(aCategory.getUpdateDate().isAfter(updatedAt));
     }
 
+
+    @Test
+    public void givenAValidDectivedCategory_whenCallActivateCategory_shouldReturnCategoryActive(){
+        final var expectedName = "Movies";
+        final var expectedDescription = "Category most popular";
+        final var expectedIsActive = true;
+
+        final var aCategory = Category.newCategory(expectedName, expectedDescription, false);
+
+        final var updatedAt = aCategory.getUpdateDate();
+
+        Assertions.assertDoesNotThrow(()-> aCategory.validate(new ThrowsValidationHandler()));
+
+        final Category actualCategory = aCategory.activate();
+
+        Assertions.assertNotNull(actualCategory.getId());
+        Assertions.assertEquals(expectedName, actualCategory.getName());
+        Assertions.assertEquals(expectedDescription, actualCategory.getDescription());
+        Assertions.assertEquals(expectedIsActive, actualCategory.isActive());
+        Assertions.assertNotNull(actualCategory.getCreationDate());
+        Assertions.assertNotNull(actualCategory.getUpdateDate());
+        Assertions.assertNull(actualCategory.getDeletionDate());
+        Assertions.assertTrue(aCategory.getUpdateDate().isAfter(updatedAt));
+    }
+
 }
