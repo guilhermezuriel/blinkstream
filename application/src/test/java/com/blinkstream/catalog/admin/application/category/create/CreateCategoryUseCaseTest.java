@@ -68,7 +68,7 @@ public class CreateCategoryUseCaseTest {
 
 
         final var aCommand = CreateCategoryCommand.with(null, expectedDescription, expectedIsActive);
-        
+
         final var expectedAssertion =  Assertions.assertThrows(DomainException.class, () -> useCase.execute(aCommand));
 
         Assertions.assertEquals(expectedMessage, expectedAssertion.getErrors().get(0).message());
